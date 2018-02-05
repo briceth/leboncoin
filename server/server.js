@@ -1,6 +1,7 @@
 import express from "express";
 import router from "./router";
 import middleware from "./middleware";
+
 const app = express();
 
 middleware(app);
