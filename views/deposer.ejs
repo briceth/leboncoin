@@ -1,15 +1,21 @@
 <div class="container">
-        <form action="/add/deposer" method="POST" enctype="multipart/form-data">
+        <form action="<%= url %>" method="POST" enctype="multipart/form-data">
             <div>
                 <label for="titre">Titre</label>
-                <input type="text" name="titre">
+                <input type="text" name="title" value="<%= annonce.title %>">
             </div>
             <div>
-                <textarea name="description" id="" cols="30" rows="10"></textarea>
+                <textarea name="description" id="" cols="30" rows="10"><%= annonce.description %></textarea>
             </div>
             <div>
                 <label for="">Prix</label>
-                <input type="text" name="price">
+                <input type="text" name="price" value="<%= annonce.price %>">
+            </div>
+            <div>
+                <label for="type">Offre</label>
+                <input type="checkbox" name="offre" value="offre">
+                <label for="type">Demande</label>
+                <input type="checkbox" name="demande" value="demande">
             </div>
             <div>
                 <label for="file">Photo</label>
@@ -17,15 +23,15 @@
             </div>
             <div>
                 <label for="city">Ville ou code postal</label>
-                <input type="text" name="city">
+                <input type="text" name="city" value="<%= annonce.city %>">
             </div>
             <div>
                 <label for="pseudo">Pseudo</label>
-                <input type="text" name="pseudo">
+                <input type="text" name="pseudo" value="<%= annonce.pseudo %>">
                 <label for="">Email</label>
-                <input type="text" name="email">
+                <input type="text" name="email" value="<%= annonce.email %>">
                 <label for="phone">Téléphone</label>
-                <input type="text" name="phone">
+                <input type="text" name="phone" value="<%= annonce.phone %>">
             </div>
             <button type="submit">Soumettre</button>
         </form>

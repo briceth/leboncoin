@@ -11,6 +11,17 @@
     <title>Document</title>
 </head>
 <body>
-    <div>hello world</div>
+    <div>
+        <% for (var i = 0; i < annonces.length; i++) { %>
+            <p>Title: <%= annonces[i].title %></p>
+            <img src="<%= annonces[i].img[0] %>" alt="photo">
+            <p>email: <%= annonces[i].email %></p>
+            <p>phone: <%= annonces[i].phone %></p>
+            <p>pseudo: <%= annonces[i].pseudo %></p>
+            <p>city: <%= annonces[i].city %></p>
+            <p>/annonce/<%= annonces[i]._id %></p>
+            <p><a href="/annonce/<%= annonces[i]._id %>">Allez voir</a></p>
+        <% } %>
+    </div>
 </body>
 </html>
