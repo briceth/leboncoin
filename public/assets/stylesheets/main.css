@@ -1,0 +1,155 @@
+:root {
+    --orange: #F26C3F;
+    --grey: #c3c1c1;
+    --blue: #1770D6;
+}
+
+section {
+    margin: 30px;
+}
+
+body {
+    font-size: 18px;
+    font-family: 'Montserrat', sans-serif;
+    background-color: #fbfbfb;
+}
+img {
+    width: 100%;
+}
+
+nav {
+    color: white;
+    background-color: var(--orange);
+    width: 100%;
+    /* position: fixed; */
+}
+
+h3 {
+    font-weight: 500;
+    line-height: 35px;
+}
+
+h1 {
+    font-weight: 700;
+}
+
+p {
+    line-height: 30px;
+    font-weight: 300;
+}
+a {
+    text-decoration: none;
+}
+
+ul {
+    display: flex;
+    justify-content: center;
+}
+li {
+    margin-right: 1px;
+    border: 1px solid var(--blue);
+    border-radius: 3px;
+    padding: 5px 10px;
+}
+
+.nav-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+#logo {
+    flex: 0 1 30%;
+    text-align: center;
+}
+.action {
+    flex: 0 1 30%;
+    text-align: center;
+    margin: 15px 0;
+    color: white;
+}
+
+.container {
+    width: 900px;
+    margin: 90px auto;
+}
+
+/* article */
+article {
+    border-radius: 3px;
+    border: 1px solid var(--grey);
+    margin-top: 15px;
+    display: flex;
+    padding: 15px;
+}   
+
+.annonce-img {
+    width: 200px;
+}
+.annonce-details {
+    padding-left: 15px;
+}
+
+.go-to-details {
+    border: 1px solid var(--blue);
+    color: var(--blue);
+    width: 100px;
+    text-align: center;
+    border-radius: 3px;
+    cursor: pointer;
+    padding: 5px 10px;
+}
+
+/* annonce */
+.img-annonce-show {
+    width: 300px;
+    margin: auto;
+}
+
+.container-annonce-show {
+    width: 500px;
+    margin: auto;
+    background-color: white;
+    border: 1px solid var(--grey);
+    border-radius: 2px;
+}
+
+.details-annonce-show {
+    padding: 15px 0px 15px 15px;
+}
+
+.actions-annonce-show {
+    margin: 15px 0 0;
+}
+
+.btn {
+    width: 135px;
+    font-size: 18px;
+    border-radius: 3px;
+}
+
+.btn-blue {
+    border: 1px solid var(--blue);
+    color: var(--blue);
+
+}
+
+.btn-red {
+    border: 1px solid red;
+    color: red;
+}
+
+/* button */
+
+@keyframes example {
+    from {border-bottom: 0px solid;}
+    to {border-bottom: 2px solid;}
+}
+
+/* .action-filter:hover {
+    border-bottom: 0px solid;
+} */
+
+.action-filter:hover {
+    animation: example 0.5s cubic-bezier(0.1, 0.7, 1.0, 0.1) 0s forwards;
+    /* border-bottom: 2px solid; */
+}

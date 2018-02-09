@@ -1,0 +1,70 @@
+<% include partials/header.ejs %>
+        <section>
+            <a class="action-filter" href="/offres">Offres</a>
+            <a class="action-filter" href="/demandes">Demandes</a>
+        </section>
+        <section>
+            <% for (var i = 1; i < annonces.length; i++) { %>
+
+               <% if(i % 10 === 0) { %>
+                <article>
+                    <div>
+                        pub le réacteur
+                    </div>
+                </article>
+               <% } %>
+                <article>
+                    <div class="annonce-img">
+                        <img src="<%= annonces[i].img[0] %>" alt="photo">
+                    </div>
+                    <div class="annonce-details">
+                        <h3><%= annonces[i].title %></h3>
+                        <p>email: <%= annonces[i].email %></p>
+                        <p>phone: <%= annonces[i].phone %></p>
+                        <p>pseudo: <%= annonces[i].pseudo %></p>
+                        <p>ville: <%= annonces[i].city %></p>
+                        <p>prix: <%= annonces[i].price %> <i class="fas fa-euro-sign"></i></p>
+                        <p><a class="go-to-details" href="/annonce/<%= annonces[i]._id %>">Allez voir</a></p>
+                    </div>
+                </article> 
+            <% } %>
+        </section>
+        <section>
+
+            <% if (pages > 0) { %>
+                <ul>
+                    <% if (current == 1) { %>
+                         <li class="disabled"><a>First</a></li>
+                    <% } else { %>
+                        <li><a href="/annonces/0">First</a></li>
+                    <% } %>
+
+                     <% var i = (Number(current) > 5 ? Number(current) - 4 : 1) %>
+                    
+                     <% if (i !== 1) { %>
+                        <li class="disabled"><a>...</a></li>
+                    <% } %>
+
+                    <% for (var i = 0; i <= (Number(current) + 4 && i <= pages); i++) { %>
+                      
+                        <% if (i == current) { %>
+                            <li class="active"><a><%= i %></a></li>
+                        <% } else { %>
+                            <li><a href="/annonces/<%= i %>"><%= i %></a></li>
+                        <% } %>
+                        <% if (i == Number(current) + 4 && i < pages) { %>
+                            <li class="disabled"><a>...</a></li>
+                        <% } %> 
+                    <% } %>
+
+                 
+                    <% if (current == pages) { %>
+                        <li class="disabled"><a>Last</a></li>
+                    <% } else { %>
+                        <li><a href="/annonces/<%= pages %>">Last</a></li>
+                    <% } %> 
+                </ul>
+            <% } %>
+            
+        </section>
+<% include partials/_footer.ejs %>

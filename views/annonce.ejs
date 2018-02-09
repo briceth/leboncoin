@@ -1,12 +1,22 @@
-<div>
-    <img src="<%= annonce.img %>" alt="photo">
-    <p><%= annonce.type %></p>
-    <p><%= annonce.title %></p>
-    <p><%= annonce.description %></p>
-    <p><%= annonce.price %></p>
-    <p><%= annonce.city %></p>
-    <p><%= annonce.pseudo %></p>
-    <p><%= annonce.email %></p>
-    <p><%= annonce.phone %></p>
-    <a href="/annonce/<%= annonce._id %>/update">Mettre à jour</a>
-</div>
+<% include partials/header.ejs %>
+    <div class="container-annonce-show">
+        <div class="details-annonce-show">
+        <h3><%= annonce.title %></h3>
+        <div class="img-annonce-show">     
+            <img src="<%= annonce.img %>" alt="photo">
+        </div>
+            <p><%= annonce.pseudo %></p>
+            <p><span>Prix:</span> <%= annonce.price %></p>
+            <p><span>Ville:</span> <%= annonce.city %></p>
+            <p><span>Description:</span> <%= annonce.description %></p>
+            <div class="actions-annonce-show">
+                <a href="/..../<%= annonce._id %>"></a>
+                    <button class="btn btn-blue">Mettre à jour</button>
+                </a>
+                <a href="/delete/<%= annonce._id %>">
+                    <button class="btn btn-red">Supprimer</button>
+                </a>
+            </div>
+        </div>
+    </div>
+<% include partials/_footer.ejs %>

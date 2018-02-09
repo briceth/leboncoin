@@ -20,7 +20,7 @@ function deleteAnnonces() {
 }
 
 function seedAnnonces() {
-  for (let i = 0; i < 5; i++) {
+  for (let i = 0; i < 6; i++) {
     const annonce = new Annonce({
       title: "Lorem Ipsum is simply dummy",
       description: faker.lorem.words(),
@@ -42,13 +42,30 @@ function seedAnnonces() {
       }
     });
   }
+  for (let i = 0; i < 6; i++) {
+    const annonce = new Annonce({
+      title: "Lorem Ipsum is simply dummy",
+      description: faker.lorem.words(),
+      price: faker.commerce.price(),
+      city: faker.address.city(),
+      pseudo: faker.internet.userName(),
+      email: faker.internet.email(),
+      phone: "0145878909",
+      type: "demande",
+      img: [faker.image.image()]
+    });
+    //console.log("annonce", annonce);
+
+    annonce.save((error, object) => {
+      if (error) {
+        log(chalk.red(error));
+      } else {
+        log(chalk.green("success"), object);
+      }
+    });
+  }
 }
 
 deleteAnnonces()
   .then(() => seedAnnonces())
   .catch(error => log(chalk.red(error)));
-//seedAnnonces();
-//getAllAnnonces();
-// deleteDB()
-//   .then(() => seedAnnonces())
-//   .catch(error => log(chalk.red(error)));

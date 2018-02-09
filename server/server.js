@@ -1,21 +1,25 @@
-import express from "express";
-import router from "./router";
-import middleware from "./middleware";
-import mongoose from "mongoose";
+import express from 'express'
+import router from './router'
+import middleware from './middleware'
+import mongoose from 'mongoose'
+import auth from './auth'
 
-const app = express();
+mongoose.connect('mongodb://localhost/students-app')
 
-mongoose.connect("mongodb://localhost/students-app");
+const app = express()
+//to write .ejs in render method
+app.set('view engine', 'ejs')
 
-middleware(app);
+middleware(app)
 
-app.use(router);
+app.use(router)
+app.use(auth)
 
 app.listen(3008, err => {
-  if (err) {
-    return console.log(err);
-  }
-  return console.log(`server is listening on 3008`);
-});
+	if (err) {
+		return console.log(err)
+	}
+	return console.log(`server is listening on 3008`)
+})
 
-exports = app;
+exports = app
