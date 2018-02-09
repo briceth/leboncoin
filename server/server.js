@@ -4,7 +4,7 @@ import middleware from './middleware'
 import mongoose from 'mongoose'
 import auth from './auth'
 
-mongoose.connect('mongodb://localhost/students-app')
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/students-app')
 
 const app = express()
 //to write .ejs in render method
