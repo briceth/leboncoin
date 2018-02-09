@@ -15,7 +15,7 @@ middleware(app)
 app.use(router)
 app.use(auth)
 
-app.listen(3008, err => {
+app.listen(process.env.PORT || 3008, err => {
 	if (err) {
 		return console.log(err)
 	}
