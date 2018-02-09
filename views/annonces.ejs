@@ -4,13 +4,11 @@
             <a class="action-filter" href="/demandes">Demandes</a>
         </section>
         <section>
-            <% for (var i = 1; i < annonces.length; i++) { %>
+            <% for (var i = 0; i < annonces.length; i++) { %>
 
                <% if(i % 10 === 0) { %>
                 <article>
-                    <div>
-                        pub le réacteur
-                    </div>
+                    <div>pub le réacteur</div>
                 </article>
                <% } %>
                 <article>
@@ -30,23 +28,22 @@
             <% } %>
         </section>
         <section>
-
             <% if (pages > 0) { %>
                 <ul>
                     <% if (current == 1) { %>
-                         <li class="disabled"><a>First</a></li>
+                        <li class="disabled"><a>First</a></li>
                     <% } else { %>
                         <li><a href="/annonces/0">First</a></li>
                     <% } %>
 
-                     <% var i = (Number(current) > 5 ? Number(current) - 4 : 1) %>
+                    <% var i = (Number(current) > 5 ? Number(current) - 4 : 1) %>
                     
-                     <% if (i !== 1) { %>
+                    <% if (i !== 1) { %>
                         <li class="disabled"><a>...</a></li>
                     <% } %>
 
                     <% for (var i = 0; i <= (Number(current) + 4 && i <= pages); i++) { %>
-                      
+                    
                         <% if (i == current) { %>
                             <li class="active"><a><%= i %></a></li>
                         <% } else { %>
@@ -57,14 +54,15 @@
                         <% } %> 
                     <% } %>
 
-                 
+                
                     <% if (current == pages) { %>
                         <li class="disabled"><a>Last</a></li>
                     <% } else { %>
                         <li><a href="/annonces/<%= pages %>">Last</a></li>
                     <% } %> 
                 </ul>
-            <% } %>
+            <% } %> 
+    
             
         </section>
 <% include partials/_footer.ejs %>

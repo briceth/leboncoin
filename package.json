@@ -12,6 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@google/maps": "^0.4.5",
     "babel-cli": "^6.26.0",
     "babel-plugin-root-import": "^5.1.0",
     "babel-preset-es2015": "^6.24.1",

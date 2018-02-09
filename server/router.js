@@ -3,24 +3,25 @@ import multer from 'multer'
 import uuidv1 from 'uuid/v1'
 import Annonce from './annonce'
 import chalk from 'chalk'
-
+import getLatAndLong from './google-service'
 const log = console.log
 const router = express.Router()
 const upload = multer({ dest: 'public/uploads/' })
 
 router.get('/annonces/:page', (req, res, next) => {
-	const page = req.params.page || 1
+	const page = req.params.page || 0
+	const limit = 5
 
 	Annonce.find({})
-		.skip(5 * page)
-		.limit(5)
+		// .skip(limit * page - limit)
+		// .limit(limit)
 		.exec((err, annonces) => {
 			Annonce.count().exec((err, count) => {
 				if (err) return next(err)
 				res.render('annonces', {
 					annonces,
 					current: page,
-					pages: Math.ceil(count / 5) //lourd
+					pages: Math.ceil(count / limit) //lourd
 				})
 			})
 		})
@@ -54,10 +55,10 @@ router.get('/annonce/:id/update', (req, res, next) => {
 	})
 })
 
-router.post('/annonce-update/:id', upload.single('file'), (req, res, next) => {
+router.post('/annonce-update/:id', upload.array('photos'), (req, res, next) => {
 	const { id } = req.params
-	const { filename } = req.file
-	//console.log("body file =>", req.file);
+	const { filename } = req.files
+	console.log('body =>', req.body)
 
 	const { annonce } = req.body
 	Annonce.findByIdAndUpdate(
@@ -75,9 +76,14 @@ router.post('/annonce-update/:id', upload.single('file'), (req, res, next) => {
 	)
 })
 
-router.post('/deposer', upload.single('file'), (req, res, next) => {
-	console.log('file', req.file)
-	const { filename } = req.file
+router.post('/deposer', upload.array('photos', 3), (req, res, next) => {
+	//console.log('files', req.files)
+	let filesName = []
+	for (let i = 0; i < req.files.length; i++) {
+		const file = req.files[i]
+		filesName.push(file.filename)
+	}
+
 	const {
 		title,
 		description,
@@ -86,29 +92,40 @@ router.post('/deposer', upload.single('file'), (req, res, next) => {
 		pseudo,
 		email,
 		phone,
-		type
+		type,
+		address
 	} = req.body
 
 	console.log('body', req.body)
-	const annonce = new Annonce({
-		title,
-		description,
-		price: parseInt(price),
-		city,
-		pseudo,
-		email,
-		phone,
-		type: type, // faut que ce soit un tableau à la création!
-		img: [filename]
-	})
+	getLatAndLong(address, (lat, lng) => {
+		console.log('from router', lat, lng)
 
-	annonce.save((error, object) => {
-		if (error) {
-			log(chalk.red(error))
-		} else {
-			log(chalk.green('success'), object)
-			res.redirect('/')
-		}
+		const annonce = new Annonce({
+			title,
+			description,
+			price: parseInt(price),
+			city,
+			pseudo,
+			email,
+			phone,
+			type: type, // faut que ce soit un tableau à la création!
+			img: filesName,
+			address: {
+				address,
+				lat,
+				lng
+			}
+		})
+		//console.log(annonce)
+
+		annonce.save((error, object) => {
+			if (error) {
+				log(chalk.red(error))
+			} else {
+				log(chalk.green('success'), object)
+				res.redirect('/annonces/1')
+			}
+		})
 	})
 })
 

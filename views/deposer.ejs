@@ -14,17 +14,25 @@
             </div>
             <div>
                 <label for="type">Offre</label>
-                <input type="checkbox" name="offre" value="offre">
+                <input type="checkbox" name="type" value="offre">
                 <label for="type">Demande</label>
-                <input type="checkbox" name="demande" value="demande">
+                <input type="checkbox" name="type" value="demande">
             </div>
             <div>
-                <label for="file">Photo</label>
-                <input type="file" name="file">
+                <label for="file">Photo 1</label>
+                <input type="file" name="photos">
+                <label for="file">Photo 2</label>
+                <input type="file" name="photos">
+                <label for="file">Photo 3</label>
+                <input type="file" name="photos">
             </div>
             <div>
                 <label for="city">Ville ou code postal</label>
                 <input type="text" name="city" value="<%= annonce.city %>">
+            </div>
+            <div>
+                <input id="searchTextField" type="text" size="50" placeholder="Anything you want!">
+                <input name="address" id="address" type="text">
             </div>
             <div>
                 <label for="pseudo">Pseudo</label>
@@ -38,3 +46,27 @@
         </form>
     </div>
 <% include partials/_footer.ejs %>
+
+<script>
+    function initMap() {
+        var input = document.getElementById('searchTextField');
+        var options = {
+            types: ['(cities)'],
+            componentRestrictions: {country: 'fr'}
+        };
+        
+        var autocomplete = new google.maps.places.Autocomplete(input, options);
+        console.log("autocomplete", autocomplete)
+        var place = autocomplete.getPlace()
+        console.log("place", place)
+
+        autocomplete.addListener('place_changed', function() {
+            var place = autocomplete.getPlace()
+            console.log("place", place)
+            const { formatted_address } = place
+            document.getElementById("address").value = formatted_address
+            console.log("value", document.getElementById("address").value)
+        })
+    }
+    </script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDgpQR_-YLaXhMIv2Zpmsh__dOIMT3NbjQ&libraries=places&callback=initMap"></script>
