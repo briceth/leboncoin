@@ -15,11 +15,12 @@ middleware(app)
 app.use(router)
 app.use(auth)
 
+//must use PORT for
 app.listen(process.env.PORT || 3008, err => {
 	if (err) {
 		return console.log(err)
 	}
-	return console.log(`server is listening on 3008`)
+	return console.log(`server is listening on ${process.env.PORT}`)
 })
 
 exports = app
